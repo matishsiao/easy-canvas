@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<head>
+	<title>HTML5 Bar Graph</title>
+	<link rel=stylesheet href="css/canvas.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/easy.canvas.js"></script>
+	<script type="text/javascript">
+		var ec = null;
+		var options = {
+					chart:{
+						height:300,
+						width:400,
+					},
+					series:[
+						{
+							type:"line",
+							xValueType:"datetime",
+							group:{
+								id:0,
+								type:"primary"
+							},
+							data:[],
+							top:0,
+							height:150
+						},
+						{
+							type:"bar",
+							xValueType:"datetime",
+							group:{
+								id:0,
+								type:"secondary",
+								slaveYAxis:false
+							},
+							data:[],
+							top:170
+						}
+					]
+					/*data:[
+						   [1,12],
+						   [2,-50],
+						   [3,35],
+						   [4,41],
+						   [5,15],
+						   [6,23],
+						   [7,16],
+						   [10,9],
+						   [11,92],
+						   [12,8],
+						   [13,71],
+						   [14,6],
+						   [17,5],
+						   [29,11],
+						   [30,145],
+						   [35,94],
+						   [40,1]
+					]*/
+				};
+			for(i = 1;i <= 50;i++){
+				options.series[0].data.push([i,(Math.random() > 0.2)?parseInt(Math.random()*1000):-parseInt(Math.random()*1000)]);
+			}
+			for(i = 1;i <= 50;i++){
+				options.series[1].data.push([i,(Math.random() > 0.2)?parseInt(Math.random()*1000):-parseInt(Math.random()*1000)]);
+			}
+			$(document).ready(function(){
+				ec = new EasyCanvas("container",options);
+			});
+			function show(type) {
+				options.series[0].type = type;
+				console.log(options);
+				ec = new EasyCanvas("container",options);
+			}
+		</script>
+</head>
+
+<body style="background:#EEEEEE;">
+	
+	<table>
+		<tr>
+			<td>
+				<button onClick=show("bar")>Bar Chart</button>
+				<button onClick=show("line")>Line Chart</button>
+				<button onClick=show("baselinebar")>Baseline Bar Chart</button>
+				<button onClick=show("baseline")>Baseline Chart</button>
+			</td>
+			<td><div id="container" style="height: 450px; min-width: 310px">Please select chart type</div></td>
+			<td>
+				<button onclick="ec.resetZoom();">Reset Zoom</button>
+				<button onclick="ec.ZoomMovePoint();">Move Point</button>
+				<button onclick="ec.ZoomIn();">Zoom In</button>
+				<button onclick="ec.ZoomOut();">Undo Zoom In(1)</button>
+			</td>
+			</tr>
+	</table>	
+	
+</body>
+</html>
