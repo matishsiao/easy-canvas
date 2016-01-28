@@ -9,12 +9,14 @@
 		var options = {
 					chart:{
 						height:300,
-						width:400,
+						width:400
 					},
 					series:[
 						{
+							name:"first",
 							type:"line",
 							xValueType:"datetime",
+							valueDecimals:1,
 							group:{
 								id:0,
 								type:"primary"
@@ -24,8 +26,10 @@
 							height:150
 						},
 						{
-							type:"bar",
+							name:"second",
+							type:"baseline",
 							xValueType:"datetime",
+							valueDecimals:2,
 							group:{
 								id:0,
 								type:"secondary",
@@ -56,11 +60,22 @@
 					]*/
 				};
 			for(i = 1;i <= 50;i++){
-				options.series[0].data.push([i,(Math.random() > 0.2)?parseInt(Math.random()*1000):-parseInt(Math.random()*1000)]);
+				if(i < 10)
+					var x = i * 1 * 1 * 1 * 1 * 1000+1453881600000;
+				else if(i < 15)
+					var x = i * 1 * 1 * 1 * 60 * 1000+1453881600000;
+				else if(i < 20)
+					var x = i * 1 * 1 * 60 * 60 * 1000+1453881600000;
+				else if(i < 30)
+					var x = i * 1 * 24 * 60 * 60 * 1000+1453881600000;
+				else
+					var x = i * 30 * 24 * 60 * 60 * 1000+1453881600000;
+
+				options.series[0].data.push([x,(Math.random() > 0.2)?parseInt(Math.random()*1000):-parseInt(Math.random()*1000)]);
+				options.series[1].data.push([x,(Math.random() > 0.2)?parseInt(Math.random()*1000):-parseInt(Math.random()*1000)]);
+
 			}
-			for(i = 1;i <= 50;i++){
-				options.series[1].data.push([i,(Math.random() > 0.2)?parseInt(Math.random()*1000):-parseInt(Math.random()*1000)]);
-			}
+
 			$(document).ready(function(){
 				ec = new EasyCanvas("container",options);
 			});
@@ -73,7 +88,7 @@
 </head>
 
 <body style="background:#EEEEEE;">
-	
+
 	<table>
 		<tr>
 			<td>
@@ -88,9 +103,11 @@
 				<button onclick="ec.ZoomMovePoint();">Move Point</button>
 				<button onclick="ec.ZoomIn();">Zoom In</button>
 				<button onclick="ec.ZoomOut();">Undo Zoom In(1)</button>
+				<button onclick="ec.switchPainer();">Draw</button>
+
 			</td>
 			</tr>
-	</table>	
-	
+	</table>
+
 </body>
 </html>

@@ -7,13 +7,13 @@ html {
 /* line 19, ../sass/bootstrap/_normalize.scss */
 body {
   margin: 0;
-  background: rgba(245,245,245,0.4);
+  background: #ECECEC;
 }
 
 table {
 	/*background-color:rgba(230,2310,230,0.2);
 	*/
-	background-color:#FFF;
+	background-color:#ECECEC;
 	/*
 		border-collapse: collapse;
 
@@ -32,7 +32,7 @@ table {
 	-moz-border-radius-topleft:5px;
 	-webkit-border-top-left-radius:5px;
 	border-top-left-radius:5px;
-}	
+}
 
  table button {
 	padding:4px;
@@ -40,7 +40,7 @@ table {
 	width:100%;
 	color:#FFF;
 	/*background-color:rgba(151,128,47,1);*/
-	background:-o-linear-gradient(bottom, #D4B447 5%, #A28213 100%);	
+	background:-o-linear-gradient(bottom, #D4B447 5%, #A28213 100%);
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #D4B447), color-stop(1, #A28213) );
 	background:-moz-linear-gradient( center top, #D4B447 5%, #A28213 100% );
 	/*rgba(151,128,47,0.5);*/
@@ -95,4 +95,4 @@ table td {
 	list-style-type :none;
 	font-weight: bold;
 	margin:4px;
-}	
+}
