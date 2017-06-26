@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<head>
+	<title>HTML5 Bar Graph</title>
+	<link rel=stylesheet href="css/canvas.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/easy.canvas.js"></script>
+	<script type="text/javascript">
+		var ec = null;
+		var $windowW = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+		var options = {
+					chart:{
+						height:300,
+						width:$windowW*0.8
+					},
+					series:[
+						{
+							name:"first",
+							type:"line",
+							xValueType:"datetime",
+							valueDecimals:1,
+							group:{
+								id:0,
+								type:"primary"
+							},
+							data:[],
+							top:0,
+							height:150
+						},
+						{
+							name:"second",
+							type:"baseline",
+							xValueType:"datetime",
+							valueDecimals:2,
+							group:{
+								id:0,
+								type:"secondary",
+								slaveYAxis:false
+							},
+							data:[],
+							top:170
+						}
+					]
+				};
+			for(i = 1;i <= 50;i++){
+				if(i < 10)
+					var x = i * 1 * 1 * 1 * 1 * 1000+1453881600000;
+				else if(i < 15)
+					var x = i * 1 * 1 * 1 * 60 * 1000+1453881600000;
+				else if(i < 20)
+					var x = i * 1 * 1 * 60 * 60 * 1000+1453881600000;
+				else if(i < 30)
+					var x = i * 1 * 24 * 60 * 60 * 1000+1453881600000;
+				else
+					var x = i * 30 * 24 * 60 * 60 * 1000+1453881600000;
+
+				options.series[0].data.push([x,(Math.random() > 0.2)?parseInt(Math.random()*1000):-parseInt(Math.random()*1000)]);
+				options.series[1].data.push([x,(Math.random() > 0.2)?parseInt(Math.random()*1000):-parseInt(Math.random()*1000)]);
+
+			}
+
+			$(document).ready(function(){
+				ec = new EasyCanvas("container",options);
+			});
+			function show(type) {
+				options.series[0].type = type;
+				ec = new EasyCanvas("container",options);
+			}
+		</script>
+</head>
+
+<body style="background:#EEEEEE;">
+
+	<table>
+		<tr>
+			<td width="10%">
+				<button onClick=show("bar")>Bar Chart</button>
+				<button onClick=show("line")>Line Chart</button>
+				<button onClick=show("baselinebar")>Baseline Bar Chart</button>
+				<button onClick=show("baseline")>Baseline Chart</button>
+			</td>
+			<td><div id="container" style="height: 450px; min-width: 600px">Please select chart type</div></td>
+			<td width="10%">
+				<button onclick="ec.resetZoom();">Reset Zoom</button>
+				<button onclick="ec.ZoomMovePoint();">Move Point</button>
+				<button onclick="ec.ZoomIn();">Zoom In</button>
+				<button onclick="ec.ZoomOut();">Undo Zoom In(1)</button>
+				<button onclick="ec.switchPainer();">Draw</button>
+			</td>
+			</tr>
+	</table>
+
+</body>
+</html>
